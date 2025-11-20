@@ -1,100 +1,176 @@
-Stock Market Application
+Here is your content converted into **clean, well-structured Markdown**:
 
-Overview
-The Stock Market Application is a two-module system built using Spring Boot, Thymeleaf, and MySQL. It allows admin and user roles with different functionalities:
+---
 
-Admin:
-Can log in using credentials stored in a properties file.
-Can add stocks by entering a stock ticker, which fetches details from the Alpha Vantage API.
-Can manage stocks, view an overview of stock transactions (buy, sell), and see platform fees collected.
+# **Stock Market Application**
 
-User:
-Can register by verifying their email with an OTP.
-Can log in after registration and view stocks available for purchase.
-Can recharge their wallet using the Razorpay API to purchase stocks.
-Can view their portfolio and sell stocks.
+## **Overview**
 
-This application handles sessions for authentication and does not use traditional security frameworks like Spring Security.
+The **Stock Market Application** is a two-module system built using **Spring Boot**, **Thymeleaf**, and **MySQL**, supporting both **Admin** and **User** roles.
 
-Technologies Used
-Backend: Spring Boot, Spring Data JPA
-Frontend: Thymeleaf, HTML, CSS
-Database: MySQL
+### **Admin Features**
 
-APIs:
-Alpha Vantage API (for fetching stock data)
-Razorpay API (for wallet recharges)
-Java Mail Sender (for OTP email verification)
+* Log in using credentials stored in the *application.properties* file
+* Add stocks by entering a stock ticker
 
-Features
-Admin Features
-Login: Admin can log in with credentials stored in the application’s application.properties file.
-Add Stock: Admin can add stocks by entering the ticker symbol. Stock details are fetched from Alpha Vantage API using RestTemplate and saved into the database.
-Manage Stocks: Admin can manage stock data and view an overview of all transactions, including:
-Total transactions (stocks bought and sold)
-Platform fee collected from transactions
+  * Fetches stock details from the **Alpha Vantage API**
+* Manage stocks and view:
 
-User Features
-Registration: Users can register by entering their details. OTP verification is done via email using Java Mail Sender.
-Login: Users can log in after successful registration.
-Wallet Recharge: Users can recharge their wallet using the Razorpay API for purchasing stocks.
-Stock Purchase: Users can view available stocks and buy them if they have enough funds in their wallet.
-Portfolio Management: Users can view their portfolio and sell stocks when desired.
+  * Total transactions (buy & sell)
+  * Platform fees collected
 
-Installation
-Prerequisites
-Java (JDK 17 or higher)
-Maven for dependency management
-MySQL database
-Razorpay API Key (for wallet recharge functionality)
-Alpha Vantage API Key (for fetching stock details)
-Email API key (for OTP email verification)
+### **User Features**
 
-Steps
-Clone the repository:
-git clone https://github.com/saishkulkarni/stock-market-springboot-thymeleaf.git
+* Register with **OTP email verification** using Java Mail Sender
+* Log in after successful verification
+* Recharge wallet using **Razorpay API**
+* Purchase available stocks
+* View and manage portfolio (buy/sell stocks)
 
-Set up the MySQL Database:
-Create a new database for the application.
-Update the application.properties file with your MySQL database credentials.
+The application uses custom session management instead of Spring Security.
 
-Example:
+---
+
+## **Technologies Used**
+
+### **Backend**
+
+* Spring Boot
+* Spring Data JPA
+
+### **Frontend**
+
+* Thymeleaf
+* HTML, CSS
+
+### **Database**
+
+* MySQL
+
+### **APIs**
+
+* **Alpha Vantage API** – fetch stock data
+* **Razorpay API** – wallet recharge
+* **Java Mail Sender** – OTP verification
+
+---
+
+## **Features**
+
+### **Admin Features**
+
+* **Login:** Credentials stored in `application.properties`
+* **Add Stock:**
+
+  * Enter ticker symbol
+  * Fetches stock details using RestTemplate
+  * Saves details to MySQL
+* **Manage Stocks:**
+
+  * View all transactions
+  * Track platform fee
+
+### **User Features**
+
+* **Registration:** With OTP verification
+* **Login**
+* **Wallet Recharge:** Using Razorpay API
+* **Buy Stocks:** If wallet balance is sufficient
+* **Portfolio:** View and sell owned stocks
+
+---
+
+## **Installation**
+
+### **Prerequisites**
+
+* Java (JDK 17+)
+* Maven
+* MySQL
+* Razorpay API Key
+* Alpha Vantage API Key
+* Email API key (for OTP)
+
+### **Steps**
+
+#### 1. **Clone the Repository**
+
+```bash
+git clone https://github.com/Nadimzafar/Stock-Market.git
+```
+
+#### 2. **Set Up MySQL Database**
+
+Create a new MySQL database and configure credentials in `application.properties`:
+
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/stock_market
 spring.datasource.username=root
 spring.datasource.password=password
+```
 
-Configure External APIs:
-Alpha Vantage API: Obtain an API key and add it to the application.properties file.
-Razorpay API: Obtain your Razorpay API key and add it to the application.properties file.
+#### 3. **Configure External APIs**
 
-Run the Application:
+Add your keys to `application.properties`:
+
+* Alpha Vantage API Key
+* Razorpay API Key
+
+#### 4. **Run the Application**
+
+```bash
 mvn spring-boot:run
+```
 
-Access the Application:
-Visit http://localhost in your web browser to access the application.
+#### 5. **Access the Application**
 
-Database Schema
-The application uses a MySQL database with the following key tables:
-users: Stores user information (email, password, wallet balance).
-stocks: Stores information about the stocks available (ticker, stock details).
-transactions: Stores transactions related to stock purchases and sales.
-admin_details: Stores the platform fees collected from users.
+Open:
 
-API Integration
-Alpha Vantage API
-The application uses the Alpha Vantage API to fetch stock data based on the ticker symbol provided by the admin.
-The data includes stock prices, company information, etc., which are then stored in the database.
+```
+http://localhost
+```
 
-Razorpay API
-Razorpay API is used for wallet recharge functionality. Users can add funds to their wallet using Razorpay.
+---
 
-Java Mail Sender
-The application uses Java Mail Sender to send OTP emails to users during the registration process.
+## **Database Schema**
 
-Session Management
-Instead of using Spring Security, the application manages user sessions directly:
-When users log in, a session is created to track their logged-in state.
-Admin and user sessions are handled separately to ensure proper access control.
+Key tables:
 
-Contributing
-Feel free to fork the repository, submit issues, or create pull requests for improvements or bug fixes. Contributions are always welcome!
+* **users** – Email, password, wallet balance
+* **stocks** – Ticker and stock information
+* **transactions** – Records of buy/sell operations
+* **admin_details** – Platform fee details
+
+---
+
+## **API Integration**
+
+### **Alpha Vantage API**
+
+Used to fetch stock details (price, company info, etc.) based on the ticker provided by admin.
+
+### **Razorpay API**
+
+Handles wallet recharge for users.
+
+### **Java Mail Sender**
+
+Used for sending OTP emails during user registration.
+
+---
+
+## **Session Management**
+
+Custom session handling instead of Spring Security:
+
+* Session created on user login
+* Admin and User sessions are handled separately
+* Ensures proper access control
+
+---
+
+## **Contributing**
+
+Feel free to fork the repository, submit issues, or open pull requests.
+**Contributions are welcome!**
+
